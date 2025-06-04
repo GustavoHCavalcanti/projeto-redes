@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
 const os = require('os');
+const fs = require('fs'); // <- Adicionado para salvar logs
 
 const app = express();
 const server = http.createServer(app);
@@ -33,7 +34,7 @@ io.on('connection', (socket) => {
     time: new Date().toISOString()
   });
 
-  // Recebe mensagens do usuario
+  // Recebe mensagens do usuário
   socket.on('chat_message', (data) => {
     console.log('Mensagem recebida:', data);
 
@@ -42,7 +43,15 @@ io.on('connection', (socket) => {
       data.timestamp = new Date().toLocaleTimeString();
     }
 
-    // Envia a mensagem para todos os usuarios conectados
+    // Salvar no arquivo chat.log
+    const logLine = `[${data.timestamp}] ${data.user}: ${data.msg}\n`;
+    fs.appendFile('chat.log', logLine, (err) => {
+      if (err) {
+        console.error('Erro ao salvar mensagem no chat.log:', err);
+      }
+    });
+
+    // Envia a mensagem para todos os usuários conectados
     io.emit('chat_message', data);
   });
 
@@ -69,6 +78,6 @@ function getLocalIP() {
 const localIP = getLocalIP();
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`)
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
   console.log(`Acessível na rede local via: http://${localIP}:${PORT}`);
 });
