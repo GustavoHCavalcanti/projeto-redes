@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Online</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center">
+  <img  src="data:image/png;base64,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" 
+        alt="Universidade de Brasília" 
+        class="fixed top-[10px] left-[15px]" 
+        style="width: 60px; height: 30px;">
+  <div class="bg-white w-full max-w-2xl shadow-md rounded-lg p-4 relative">
+    <h1 class="text-[20px] md:text-2xl font-mono mb-[1px] mx-1"> Chat ao vivo</h1>
+
+    <div class="flex flex-col space-y-2 mb-4">
+      <input id="username" type="text" placeholder="Seu nome" class="p-2 border rounded" />
+      <div id="chat-box" class="h-64 overflow-y-scroll border p-2 bg-gray-50 rounded text-sm"></div>
+      <input id="message" type="text" placeholder="Digite sua mensagem" class="p-2 border rounded" />
+      <button id="send" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Enviar
+      </button>
+      <div class="absolute top-[1px] right-1 md:top-[1px] md:right-2 font-mono text-[10px] md:text-sm" >
+            Projeto Redes de Computadores 25.1
+      </div>
+    </div>
+  </div>
+  </div>
+  
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  console.log("Socket.IO carregado?", !!window.io); // Verifique no console do navegador
+</script>
+<script> 
+
+const socket = io('http://' + window.location.hostname + ':3000', {
+  reconnectionAttempts: 5,
+  timeout: 10000
+});
+
+
+// Elementos da interface
+const chatBox = document.getElementById("chat-box");
+const usernameInput = document.getElementById("username");
+const messageInput = document.getElementById("message");
+const sendButton = document.getElementById("send");
+
+// Adiciona uma nova mensagem no chat
+function appendMessage(msg) {
+  const p = document.createElement("p");
+  p.textContent = msg;
+  chatBox.appendChild(p);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Enviar mensagem ao clicar no botão
+sendButton.onclick = () => {
+  const user = usernameInput.value.trim() || "Anonimo";
+  const msg = messageInput.value.trim();
+  if (msg) {
+    socket.emit("chat_message", { user, msg, timestamp: new Date().toLocaleTimeString() });
+    messageInput.value = "";
+  }
+};
+
+// Receber mensagem do servidor
+socket.on("chat_message", (data) => {
+  appendMessage(`[${data.timestamp}] ${data.user}: ${data.msg}`);
+});
+
+// Tratamento de erros
+socket.on('connect', () => {
+  console.log('✅ Conectado ao servidor! ID:', socket.id);
+});
+
+socket.on('connect_error', (err) => {
+  console.error('Erro de conexão:', err.message);
+});
+</script>
+</body>
+</html>
+
