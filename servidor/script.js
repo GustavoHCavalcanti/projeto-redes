@@ -1,4 +1,8 @@
-const socket = io();
+const socket = io('http://' + window.location.hostname + ':3000', {
+  reconnectionAttempts: 5,
+  timeout: 10000
+});
+
 
 // Elementos da interface
 const chatBox = document.getElementById("chat-box");
@@ -16,15 +20,24 @@ function appendMessage(msg) {
 
 // Enviar mensagem ao clicar no botão
 sendButton.onclick = () => {
-  const user = usernameInput.value.trim();
+  const user = usernameInput.value.trim() || "Anonimo";
   const msg = messageInput.value.trim();
-  if (user && msg) {
-    socket.emit("chat_message", { user, msg });
+  if (msg) {
+    socket.emit("chat_message", { user, msg, timestamp: new Date().toLocaleTimeString() });
     messageInput.value = "";
   }
 };
 
 // Receber mensagem do servidor
 socket.on("chat_message", (data) => {
-  appendMessage(`${data.user}: ${data.msg}`);
+  appendMessage(`[${data.timestamp}] ${data.user}: ${data.msg}`);
+});
+
+// Tratamento de erros
+ssocket.on('connect', () => {
+  console.log('✅ Conectado ao servidor! ID:', socket.id);
+});
+
+socket.on('connect_error', (err) => {
+  console.error('Erro de conexão:', err.message);
 });
